@@ -1,4 +1,9 @@
 window.onload = function () {
+  //this.checkwinnerfunc();
+//this.boardgrid();
+//this.ex2_3();
+currentplayer = " ";
+
   //var newgame = document.querySelector(".btn");
   var boardgame = document.getElementById("board").children;
   for (let i = 0; i < boardgame.length; i++) {
@@ -7,24 +12,34 @@ window.onload = function () {
     console.log(brdgame.classList);
   }
 
+  var status = document.getElementById("status");
+ 
+
+  var player1Array = ["i","a","m","s","a","d","h","e","l"];
   var player1turn = 10;
   for (let i = 0; i < boardgame.length; i++) {
+    
     boardgame.item(i).addEventListener("click", function () {
       if (player1turn % 2 == 0) {
         boardgame.item(i).innerHTML = "X";
         boardgame.item(i).classList.add("X");
-        player1Array.push(1);
+        player1Array[i]="X";
+        currentplayer=i;
+       checkwinnerfunc(player1Array, status, "X")
+
       } else {
         boardgame.item(i).innerHTML = "O";
         boardgame.item(i).classList.add("O");
-        player2Array.push(1);
+        player1Array[i]="O";
+        currentplayer=i;
+        checkwinnerfunc(player1Array, status, "O")
       }
       player1turn--;
-      //player2turn--;
-
+      
       console.log("you clicked box number" + i);
       console.log(player1Array);
-      console.log(player2Array);
+      console.log(currentplayer);
+    
     });
 
     boardgame.item(i).onmouseenter = function () {
@@ -39,15 +54,40 @@ window.onload = function () {
     function mouseLeave() {
       boardgame.item(i).classList.remove("hover");
     }
+  
+    }
+  
+
+ 
+
+
+
+  const checkwinner = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+function checkwinnerfunc(player1Array, status, currentplayer){
+ 
+  for (var j = 0; j < checkwinner.length; j++){
+    checkpos = checkwinner[j][0];
+    checkpos1 = checkwinner [j][1];
+    checkpos2 = checkwinner [j][2];
+    console.log(checkpos);
+    if (player1Array[checkpos] == currentplayer && player1Array[checkpos1] == currentplayer && player1Array[checkpos2]==currentplayer){
+     status.textContent = "Congratulation!" +"" + currentplayer +" "+ "is the Winner!";
+      status.classList.add("you-won");
+      return true;
+     
+    }
+  
   }
+} 
+   
 
-  var player1Array = new Array(5);
-  var player2Array = new Array(4);
-
-  // document
-  // .getElementsById("hover")
-  // .addEventListener("mouseover", mouseOver);
-  // document
-  //   .getElementsByClassName("hover")
-  //  .addEventListener("mouseout", mouseOut);
 };

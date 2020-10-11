@@ -1,9 +1,9 @@
 window.onload = function () {
   
 currentplayer = " ";
-
- 
-  
+var player1Array = ["i","a","m","s","a","d","h","e","l"];
+var player1turn = 10;
+var status = document.getElementById("status");
 
   var boardgame = document.getElementById("board").children;
   for (let i = 0; i < boardgame.length; i++) {
@@ -12,36 +12,39 @@ currentplayer = " ";
     console.log(brdgame.classList);
   }
 
-  var status = document.getElementById("status");
- 
-
-  var player1Array = ["i","a","m","s","a","d","h","e","l"];
-  var player1turn = 10;
+  var winner = false;
+  
   for (let i = 0; i < boardgame.length; i++) {
-    
     boardgame.item(i).addEventListener("click", function () {
+     if(winner == false){
       if (player1turn % 2 == 0) {
         boardgame.item(i).innerHTML = "X";
         boardgame.item(i).classList.add("X");
         player1Array[i]="X";
         currentplayer=i;
-       checkwinnerfunc(player1Array, status, "X")
-
-      } else {
+       winner = checkwinnerfunc(player1Array, status, "X")
+        
+            } else  {
         boardgame.item(i).innerHTML = "O";
         boardgame.item(i).classList.add("O");
         player1Array[i]="O";
         currentplayer=i;
-        checkwinnerfunc(player1Array, status, "O")
-      }
+       
+       winner= checkwinnerfunc(player1Array, status, "O")
+        }
+     
+    
+    
       player1turn--;
       
       console.log("you clicked box number" + i);
       console.log(player1Array);
       console.log(currentplayer);
+     }
     
     });
-
+  
+  
     boardgame.item(i).onmouseenter = function () {
       mouseEnter();
     };
@@ -55,7 +58,11 @@ currentplayer = " ";
       boardgame.item(i).classList.remove("hover");
     }
   
-    }
+  }
+
+    
+  
+    
   
 
 
@@ -82,6 +89,8 @@ function checkwinnerfunc(player1Array, status, currentplayer){
       status.classList.add("you-won");
       return true;
      
+    }else{
+      return false;
     }
   
   }
@@ -104,6 +113,8 @@ document.addEventListener('click', function(event){
      }
     }
   });
+
+  
 
 
   

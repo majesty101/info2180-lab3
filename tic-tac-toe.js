@@ -1,10 +1,10 @@
 window.onload = function () {
-  //this.checkwinnerfunc();
-//this.boardgrid();
-//this.ex2_3();
+  
 currentplayer = " ";
 
-  //var newgame = document.querySelector(".btn");
+ 
+  
+
   var boardgame = document.getElementById("board").children;
   for (let i = 0; i < boardgame.length; i++) {
     var brdgame = boardgame[i];
@@ -58,8 +58,6 @@ currentplayer = " ";
     }
   
 
- 
-
 
 
   const checkwinner = [
@@ -88,6 +86,28 @@ function checkwinnerfunc(player1Array, status, currentplayer){
   
   }
 } 
-   
 
+
+
+
+
+var newgame = document.querySelector(".btn");
+document.addEventListener('click', function(event){
+    if (event.target.matches('.btn')){
+      status.classList.remove("you-won");
+      status.innerHTML =  'Move your mouse over a square and click to play an X or an O.';
+      for (let y= 0; y<=boardgame.length; y++){
+        boardgame[y].classList.remove("X");
+        boardgame[y].classList.remove("O");
+        boardgame[y].innerHTML = "";
+        storage=[];
+     }
+    }
+  });
+
+
+  
+
+   
+  
 };
